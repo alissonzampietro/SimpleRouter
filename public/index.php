@@ -1,12 +1,16 @@
 <?php
 require __DIR__."/../vendor/autoload.php";
 
-use Routers\RouterCaller;
-use FileManager\FileReader;
-use App\Controller\MeninoController;
+//cache in days
+$GLOBALS["CACHE_TIME"] = 5;
 
-(new FileReader());
-$router = new RouterCaller();
+use Routers\Router;
+use App\Controller\MeninoController;
+use File\Reader;
+
+$reader = new Reader();
+
+$router = new Router();
 
 $router->get("/hubira/viado", function ($alisson) {
     var_dump($alisson);

@@ -18,6 +18,6 @@ class Router extends SettingRoute
             return;
         if($route[1] != self::$uri[1] || $route[2] != self::$uri[2])
             return;
-        $array = array(self::$uriClass, self::$uriMethod)
+        $array = array(self::$uriClass, self::$uriMethod);
     }
 }

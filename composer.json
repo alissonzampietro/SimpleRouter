@@ -11,8 +11,8 @@
     	"psr-4": {
     		"App\\" : "app/",
     		"Public\\" : "public/",
-    		"Routers\\" : "routers/",
-    		"FileManager\\" : "filemanager/"
+    		"File\\" : "file/",
+    		"Routers\\" : "routers/"
     	}
     }
 }
