@@ -3,15 +3,22 @@ namespace Routers;
 
 class SettingRoute
 {   
-    private static $uri;
+    protected static $uri;
     
-    private static $uriClass;
+    protected static $uriClass;
     
-    private static $lengthParams;
+    protected static $lengthParams;
     
-    private static $uriMethod;
+    protected static $uriMethod;
     
-    private static $params;
+    protected static $params;
+    
+    protected static function setRequest()
+    {
+    	self::$uri = explode("/", $_SERVER['REQUEST_URI']);
+    	self::setUriClass();
+    	self::setUriMethod();
+    }
     
     /**
      * Method to return the class of the URI

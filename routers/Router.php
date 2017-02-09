@@ -1,14 +1,15 @@
 <?php
 namespace Routers;
 
+use File\Reader;
+
 class Router extends SettingRoute
 {
 
     public function __construct()
-    {
-        self::$uri = explode("/", $_SERVER['REQUEST_URI']);
-        self::setUriClass();
-        self::setUriMethod();
+    {	
+    	(new Reader());
+        
     }
 
     public function get($route, $function)
