@@ -10,10 +10,8 @@ class Reader
     {
         $verifiedFiles = file_get_contents(__DIR__."/../controllersrouters.json");
         $filesAvailable = json_decode($verifiedFiles);
-        
         $now = time();
-        $lastupdate = strtotime($filesAvailable->LastUpdate);
-        $dayslastUpdate = round(($now - $lastupdate)/ (60 * 60 * 24));
+        $dayslastUpdate = round(($now - strtotime($filesAvailable->LastUpdate))/ (60 * 60 * 24));
         
         //if($dayslastupdate > self::$CACHE_TIME) {
             
@@ -24,6 +22,7 @@ class Reader
             {
                 array_push($fileNoExtension, explode(".", $file)[0]);
             }
+            
             $newItems = array_diff($fileNoExtension, $filesAvailable->Controllers);
             foreach ($newItems as $newItem)
             {

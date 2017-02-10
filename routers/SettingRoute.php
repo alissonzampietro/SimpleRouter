@@ -13,6 +13,7 @@ class SettingRoute
     
     protected static $params;
     
+
     public static function setDataRequest()
     {
         self::$uri = explode("/", $_SERVER['REQUEST_URI']);
