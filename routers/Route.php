@@ -1,7 +1,7 @@
 <?php
 namespace Routers;
 
-class SettingRoute
+abstract class Route
 {   
     protected static $uri;
     
@@ -27,7 +27,7 @@ class SettingRoute
      */
     private static function setUriClass()
     {
-        self::$uriClass = ucfirst(self::$uri[1])."Controller";
+        self::$uriClass = ucfirst(self::$uri[1]);
     }
     
     /**
