@@ -6,28 +6,29 @@ use File\Reader;
 class Router extends Route
 {
 	
-	private $controllersCached;
-
-    public function __construct()
+	private $classes;
+	private $instance;
+	private $namespace;
+	
+	// You need define default namespace for controller, when create the instance of Router
+    public function __construct($namespace)
     {
+    	$this->namespace = $namespace;
         self::setDataRequest();
         // atualizar o cache
-        $reader = new Reader();
-        $this->controllersCached = $reader->getCachedControllers();
+        $reader = new Reader(__DIR__."/../app/Controller/");
+        $this->classes = $reader->getFileClasses();
         
-        $instance = $this->findRoute(self::$uriClass);
-        if($instance == FALSE)
-        	header("HTTP/1.0 404 Not Found");
-        $reader->findRoute(self::$uriClass);
+        $this->instance = $this->instance(self::$uriClass);
     }
     
-    private function findRoute($route)
+    private function instance($route)
     {
-    	if(in_array($route, $this->controllersCached)) {
-    		$controller = ucfirst($route)."Controller";
+    	if(in_array($route, $this->classes)) {
+    		$controller = $this->namespace."\\".ucfirst($route);
     		return new $controller();
     	}else{
-    		return false;
+    		header("HTTP/1.0 404 Not Found");
     	}
     
     }
@@ -37,8 +38,8 @@ class Router extends Route
         $route = explode("/", $route);
         if($_SERVER['REQUEST_METHOD'] != "GET")
             return;
-        if($route[1] != self::$uri[1] || $route[2] != self::$uri[2])
-            return;
-        $array = array(self::$uriClass, self::$uriMethod);
+        if($route[1] != self::$uri[1])
+            return false;
+        $function($this->instance);
     }
 }
