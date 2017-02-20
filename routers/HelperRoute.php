@@ -1,7 +1,7 @@
 <?php
 namespace Routers;
 
-abstract class Route
+abstract class HelperRoute
 {   
     protected static $uri;
     
@@ -24,11 +24,9 @@ abstract class Route
     {
         self::$uriClass = ucfirst(self::$uri[1]);
     }
-    
-    private static function setLengthParams($route)
+
+    private static function setParamsGetMethod()
     {
-        $routeExploded = explode("{", $route);
-        self::$lengthParams = count($routeExploded) - 1;
-                
+        
     }
 }

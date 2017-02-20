@@ -6,7 +6,7 @@ use App\Controller;
 
 $router = new Router("App\\Controller");
 
-$router->get("/menino", function ($classMessage) {
+$router->get("/menino/$/$", function ($classMessage) {
     echo $classMessage->mensagem("Maria");
 });
 
