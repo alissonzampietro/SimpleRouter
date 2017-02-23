@@ -10,13 +10,6 @@ class Router extends HelperRoute
 	// You need define default namespace for controller, when create the instance of Router
     public function __construct($namespace)
     {
-        if (preg_match('/\.(?:png|jpg|jpeg|gif)$/', $_SERVER["REQUEST_URI"])) {
-            echo "oi";
-            exit;
-        } else {
-            include __DIR__ . '/index.php';
-        }
-
     	$this->namespace = $namespace;
         self::setDataRequest();
         // atualizar o cache
