@@ -5,14 +5,21 @@ abstract class HelperRoute
 {   
     protected static $uri;
     
+    protected static $httpMethod;
+    
     protected static $uriClass;
     
     protected static $params;
     
 
-    public static function setDataRequest()
+    public static function setDataRequest($uri, $httpMethod)
     {
-        self::$uri = explode("/", $_SERVER['REQUEST_URI']);
+        if($uri == NULL)
+            $uri = $_SERVER['REQUEST_URI'];
+        if($httpMethod == NULL)
+            self::$httpMethod = $_SERVER['REQUEST_METHOD'];
+        
+        self::$uri = explode("/", $uri);
         self::setUriClass();
     }
     
@@ -23,10 +30,5 @@ abstract class HelperRoute
     private static function setUriClass()
     {
         self::$uriClass = ucfirst(self::$uri[1]);
-    }
-
-    private static function setParamsGetMethod()
-    {
-        
     }
 }

@@ -12,11 +12,10 @@ class RouterTest extends TestCase
     
     public function __construct()
     {
-        $this->router = new Router("App\\Controller");
-        $_SERVER['REQUEST_METHOD'] = '/menino';
+        $this->router = new Router("App\\Controller", "/menino", "GET");
     }
 
-    public function testSeCriaInstância()
+    public function testSeCriaInstancia()
     {
         $this->router->get("/menino", function($instancia) {
             $this->assertInstanceOf('Menino', $instancia);

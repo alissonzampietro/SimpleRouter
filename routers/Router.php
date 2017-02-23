@@ -8,10 +8,10 @@ class Router extends HelperRoute
 	private $namespace;
 	
 	// You need define default namespace for controller, when create the instance of Router
-    public function __construct($namespace)
+    public function __construct($namespace, $uri = NULL, $httpMethod = NULL)
     {
     	$this->namespace = $namespace;
-        self::setDataRequest();
+        self::setDataRequest($uri, $httpMethod);
         // atualizar o cache
     }
     
@@ -26,7 +26,7 @@ class Router extends HelperRoute
     private function getValidParams($params)
     {
         $length = count($params) - 2;
-        $uri = explode("/", $_SERVER['REQUEST_URI']);
+        $uri = explode("/", self::$uri);
         return false;
     }
 
@@ -36,7 +36,7 @@ class Router extends HelperRoute
     		$this->namespace = $namespaceNeeded;
     	
         $route = explode("/", $route);
-        if($_SERVER['REQUEST_METHOD'] != "GET")
+        if(self::$httpMethod != "GET")
             return;
         if($route[1] != self::$uri[1])
             return false;
